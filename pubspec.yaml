@@ -1,8 +1,8 @@
 name: firestore_mock
 description: Google Cloud Firestore Test Helpers
 version: 0.0.1
-author:
-homepage:
+author: Jaroslaw Butajlo (jarekb123)
+homepage: https://github.com/jarekb123/firestore_mock
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
