@@ -1,0 +1,1 @@
+library firestore_mock;
