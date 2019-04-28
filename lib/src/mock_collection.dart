@@ -6,23 +6,40 @@ import 'package:mockito/mockito.dart';
 import 'mock_document.dart';
 import 'utils.dart';
 
+// TODO: Collection changes propagated to snapshots stream
 class MockCollectionReference extends Mock implements CollectionReference {
-  final KtList<DocumentReference> documents;
+  final Map<String, dynamic> data;
 
-  MockCollectionReference({@required this.documents});
+  List<DocumentReference> get documents =>
+      _collectionDataToDocumentReferences(data);
+
+  MockCollectionReference({@required this.data});
 
   @override
   DocumentReference document([String path]) =>
-      documents.first((it) => it.documentID == path);
+      documents.firstWhere((it) => it.documentID == path);
 
   @override
-  // TODO: Collection changes propagated to snapshots stream
   Future<DocumentReference> add(Map<String, dynamic> data) {
     final generatedID = randomString(20);
 
     return Future.value(MockDocumentReference(
       documentID: generatedID,
-      data: KtMap.from(data),
+      data: data,
     ));
   }
+
+  @override
+  Future<QuerySnapshot> getDocuments() {
+    // TODO: implement getDocuments
+    return null;
+  }
+}
+
+List<DocumentReference> _collectionDataToDocumentReferences(
+  Map<String, Map<String, dynamic>> data,
+) {
+  return mapFrom(data).map((entry) {
+    return MockDocumentReference(documentID: entry.key, data: entry.value);
+  }).asList();
 }

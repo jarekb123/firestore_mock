@@ -7,7 +7,7 @@ import 'mock_collection.dart';
 import 'mock_document.dart';
 
 class MockFirestore extends Mock implements Firestore {
-  final KtMap<String, dynamic> data;
+  final Map<String, dynamic> data;
 
   /// Creates mock for Firestore
   ///
@@ -16,7 +16,7 @@ class MockFirestore extends Mock implements Firestore {
   /// ```json
   /// {
   ///   "articles": {
-  ///       "documentid1": {
+  ///       "document_id_1": {
   ///         "title": "Flutter is Awesome",
   ///         "author": "uid",
   ///         "views": 123,
@@ -28,20 +28,16 @@ class MockFirestore extends Mock implements Firestore {
   ///       }
   /// }
   /// ```
-  MockFirestore({@required Map<String, dynamic> data})
-      : data = KtMap.from(data);
+  MockFirestore({@required this.data});
 
   /// Returns mock for collection at [path].
   ///
   /// Note: Currently only first level collection is supported.
   @override
   CollectionReference collection(String path) {
-    final collection = data[path] as KtMap<String, dynamic>;
+    final collectionData = data[path] as Map<String, dynamic>;
 
-    return MockCollectionReference(
-      documents: collection.map(
-        (it) => MockDocumentReference(documentID: it.key, data: it.value),
-      ),
-    );
+    return MockCollectionReference(data: collectionData);
   }
 }
+

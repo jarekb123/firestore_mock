@@ -9,13 +9,13 @@ class MockDocumentSnapshot extends Mock implements DocumentSnapshot {
   final DocumentReference reference;
 
   MockDocumentSnapshot.fromRef(MockDocumentReference mockReference)
-      : data = mockReference.data.asMap(),
+      : data = mockReference.data,
         documentID = mockReference.documentID,
         reference = mockReference;
 }
 
 class MockDocumentReference extends Mock implements DocumentReference {
-  final KtMap<String, dynamic> data;
+  final Map<String, dynamic> data;
   final String documentID;
 
   MockDocumentReference({@required this.documentID, @required this.data});
