@@ -1,19 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kt_dart/kt.dart';
 import 'package:meta/meta.dart';
-import 'package:mockito/mockito.dart';
 
 import 'mock_document.dart';
+import 'mock_query.dart';
 import 'utils.dart';
 
 // TODO: Collection changes propagated to snapshots stream
-class MockCollectionReference extends Mock implements CollectionReference {
-  final Map<String, dynamic> data;
-
+class MockCollectionReference extends MockQuery implements CollectionReference {
   List<DocumentReference> get documents =>
-      _collectionDataToDocumentReferences(data);
+      collectionDataToDocumentReferences(data);
 
-  MockCollectionReference({@required this.data});
+  MockCollectionReference({@required Map<String, Map<String, dynamic>> data})
+      : super(data);
 
   @override
   DocumentReference document([String path]) =>
@@ -28,18 +26,4 @@ class MockCollectionReference extends Mock implements CollectionReference {
       data: data,
     ));
   }
-
-  @override
-  Future<QuerySnapshot> getDocuments() {
-    // TODO: implement getDocuments
-    return null;
-  }
-}
-
-List<DocumentReference> _collectionDataToDocumentReferences(
-  Map<String, Map<String, dynamic>> data,
-) {
-  return mapFrom(data).map((entry) {
-    return MockDocumentReference(documentID: entry.key, data: entry.value);
-  }).asList();
 }
