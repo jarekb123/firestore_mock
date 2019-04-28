@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kt_dart/kt.dart';
 import 'package:meta/meta.dart';
 import 'package:mockito/mockito.dart';
 
 import 'mock_collection.dart';
-import 'mock_document.dart';
 
 class MockFirestore extends Mock implements Firestore {
   final Map<String, dynamic> data;
@@ -37,7 +35,6 @@ class MockFirestore extends Mock implements Firestore {
   CollectionReference collection(String path) {
     final collectionData = data[path] as Map<String, dynamic>;
 
-    return MockCollectionReference(data: collectionData);
+    return MockCollectionReference(firestore: this, data: collectionData);
   }
 }
-

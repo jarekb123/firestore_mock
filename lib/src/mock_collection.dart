@@ -10,8 +10,10 @@ class MockCollectionReference extends MockQuery implements CollectionReference {
   List<DocumentReference> get documents =>
       collectionDataToDocumentReferences(data);
 
-  MockCollectionReference({@required Map<String, Map<String, dynamic>> data})
-      : super(data);
+  MockCollectionReference(
+      {@required Firestore firestore,
+      @required Map<String, Map<String, dynamic>> data})
+      : super(firestore, data);
 
   @override
   DocumentReference document([String path]) =>

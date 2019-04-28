@@ -20,11 +20,12 @@ class MockQuerySnapshot extends Mock implements QuerySnapshot {
 }
 
 class MockQuery extends Mock implements Query {
+  final Firestore firestore;
   final Map<String, Map<String, dynamic>> data;
 
   KtMap<String, Map<String, dynamic>> get _ktData => mapFrom(data);
 
-  MockQuery(this.data);
+  MockQuery(this.firestore, this.data);
 
   @override
   Future<QuerySnapshot> getDocuments() => Future.value(MockQuerySnapshot(data));
@@ -49,7 +50,7 @@ class MockQuery extends Mock implements Query {
         .filter(_isNull(field, isNull))
         .asMap();
 
-    return MockQuery(filteredData);
+    return MockQuery(firestore, filteredData);
   }
 
   QueryPredicate _isEqualTo(String field, isEqualTo) =>
