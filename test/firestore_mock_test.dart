@@ -42,6 +42,7 @@ void main() {
       final articles = await articlesCollection.getDocuments();
 
       expect(articles.documents, hasLength(3));
+      expect(articles.documents[0].documentID, 'article_id_1');
     });
 
     test('get document by ID from collection', () async {
