@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:kt_dart/kt.dart';
 import 'package:meta/meta.dart';
 import 'package:mockito/mockito.dart';
 

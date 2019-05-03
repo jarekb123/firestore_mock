@@ -76,9 +76,10 @@ void main() {
     };
     final collection = mockFirestore.collection('users');
     final addedUserRef = await collection.add(userData);
+    final addedUser = collection.document(addedUserRef.documentID);
+    final addedUserSnap = await addedUser.get();
 
-
-
+    expect(addedUserSnap.data, userData);
   });
 
   group('query.where(...)', () {
