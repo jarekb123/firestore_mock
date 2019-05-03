@@ -35,6 +35,8 @@ class MockFirestore extends Mock implements Firestore {
   CollectionReference collection(String path) {
     final collectionData = data[path] as Map<String, dynamic>;
 
-    return MockCollectionReference(firestore: this, data: collectionData);
+    return MockCollectionReference(collection: path, firestore: this, data: collectionData);
   }
+
+
 }
