@@ -10,14 +10,18 @@ import 'utils.dart';
 class MockCollectionReference extends MockQuery implements CollectionReference {
   final String collection;
 
-  List<DocumentReference> get documents => collectionDataToDocumentReferences(data);
+  List<DocumentReference> get documents =>
+      collectionDataToDocumentReferences(data);
 
   MockCollectionReference(
-      {@required this.collection, @required MockFirestore firestore, @required Map<String, Map<String, dynamic>> data})
+      {@required this.collection,
+      @required MockFirestore firestore,
+      @required Map<String, Map<String, dynamic>> data})
       : super(firestore, data);
 
   @override
-  DocumentReference document([String path]) => documents.firstWhere((it) => it.documentID == path);
+  DocumentReference document([String path]) =>
+      documents.firstWhere((it) => it.documentID == path);
 
   @override
 

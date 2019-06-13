@@ -24,7 +24,8 @@ List<DocumentReference> collectionDataToDocumentReferences(
   }).asList();
 }
 
-List<DocumentSnapshot> dataToDocumentSnapshots(Map<String, Map<String, dynamic>> data) {
+List<DocumentSnapshot> dataToDocumentSnapshots(
+    Map<String, Map<String, dynamic>> data) {
   return collectionDataToDocumentReferences(data)
       .map((ref) => MockDocumentSnapshot.fromRef(ref))
       .toList(growable: false);
