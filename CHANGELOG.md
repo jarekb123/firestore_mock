@@ -1,3 +1,6 @@
+## [0.0.3] - 2019/06/13
+* Basic mock implementation for `Query.snapshots()`
+
 ## [0.0.2] - 2019/05/03
 
 * `Query.limit`, `Query.orderBy`
