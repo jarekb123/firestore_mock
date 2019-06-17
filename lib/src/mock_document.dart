@@ -14,7 +14,7 @@ class MockDocumentSnapshot extends Mock implements DocumentSnapshot {
 }
 
 class MockDocumentReference extends Mock implements DocumentReference {
-  final Map<String, dynamic> data;
+  Map<String, dynamic> data;
   final String documentID;
 
   MockDocumentReference({@required this.documentID, @required this.data});
@@ -22,4 +22,15 @@ class MockDocumentReference extends Mock implements DocumentReference {
   @override
   Future<DocumentSnapshot> get() =>
       Future.value(MockDocumentSnapshot.fromRef(this));
+
+  @override
+  Future<void> delete() async {
+    //TODO: Propagate remove from MockFirestore data
+    // Now: Do nothing
+  }
+
+  @override
+  Future<void> updateData(Map<String, dynamic> data) async {
+    this.data = data;
+  }
 }
