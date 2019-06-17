@@ -1,6 +1,6 @@
 name: firestore_mock
 description: Google Cloud Firestore Test Helpers
-version: 0.0.3
+version: 0.0.4
 author: Jaroslaw Butajlo <jaroslaw.butajlo@gmail.com>
 homepage: https://github.com/jarekb123/firestore_mock
 
