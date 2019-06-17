@@ -1,3 +1,7 @@
+## [0.0.4] - 2019/06/17
+* Empty implementation of `DocumentReference.delete()` 
+* Basic implementation of `DocumentReference.updateData(Map)`
+
 ## [0.0.3] - 2019/06/13
 * Basic mock implementation for `Query.snapshots()`
 
