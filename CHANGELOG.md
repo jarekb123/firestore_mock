@@ -1,5 +1,8 @@
+## [0.0.4+1] 2019/06/18
+# Updated cloud_firestore dependency to version 0.11.0+2
+
 ## [0.0.4] - 2019/06/17
-* Empty implementation of `DocumentReference.delete()` 
+* Empty implementation of `DocumentReference.delete()`
 * Basic implementation of `DocumentReference.updateData(Map)`
 
 ## [0.0.3] - 2019/06/13
