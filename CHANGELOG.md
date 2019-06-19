@@ -1,5 +1,6 @@
-## [0.0.4+1] 2019/06/18
-# Updated cloud_firestore dependency to version 0.11.0+2
+## [0.0.4+1] 2019/06/19
+* Updated cloud_firestore dependency to version 0.11.0+2
+* Added support for reading from subcollections
 
 ## [0.0.4] - 2019/06/17
 * Empty implementation of `DocumentReference.delete()`
