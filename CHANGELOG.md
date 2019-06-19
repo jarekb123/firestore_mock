@@ -1,4 +1,4 @@
-## [0.0.4+1] 2019/06/19
+## [0.0.5] 2019/06/19
 * Updated cloud_firestore dependency to version 0.11.0+2
 * Added support for reading from subcollections
 
