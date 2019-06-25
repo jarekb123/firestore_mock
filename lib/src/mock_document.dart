@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firestore_mock/src/mock_collection.dart';
 import 'package:meta/meta.dart';
 import 'package:mockito/mockito.dart';
 
@@ -32,5 +33,13 @@ class MockDocumentReference extends Mock implements DocumentReference {
   @override
   Future<void> updateData(Map<String, dynamic> data) async {
     this.data = data;
+  }
+
+  @override
+  CollectionReference collection(String collectionPath) {
+    final collectionData = data[collectionPath] as Map<String, dynamic>;
+
+    return MockCollectionReference(
+        collection: path, firestore: null, data: collectionData);
   }
 }

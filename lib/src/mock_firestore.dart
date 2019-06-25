@@ -30,7 +30,6 @@ class MockFirestore extends Mock implements Firestore {
 
   /// Returns mock for collection at [path].
   ///
-  /// Note: Currently only first level collection is supported.
   @override
   CollectionReference collection(String path) {
     final collectionData = data[path] as Map<String, dynamic>;

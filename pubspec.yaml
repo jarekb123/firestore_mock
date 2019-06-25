@@ -1,6 +1,6 @@
 name: firestore_mock
 description: Google Cloud Firestore Test Helpers
-version: 0.0.4
+version: 0.0.4+1
 author: Jaroslaw Butajlo <jaroslaw.butajlo@gmail.com>
 homepage: https://github.com/jarekb123/firestore_mock
 
@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   meta: ^1.1.6
-  cloud_firestore: ^0.9.13+1
+  cloud_firestore: ^0.11.0+2
   kt_dart: ^0.6.1
   mockito: ^4.0.0
 

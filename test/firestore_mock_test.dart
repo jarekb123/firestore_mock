@@ -11,17 +11,29 @@ void main() {
         'article_id_1': {
           'title': 'Flutter is awesome',
           'author': 'Mr Smith',
-          'views': 123
+          'views': 123,
+          'comments': {
+            'comment-1': {
+              'author': 'Mike Kelly',
+              'message': 'Good article.',
+            },
+            'comment-2': {
+              'author': 'Paul Arnold',
+              'message': 'Deecent article.'
+            },
+          }
         },
         'article_id_2': {
           'title': 'Flutter is awesome',
           'author': 'Mr Bean',
-          'views': 123
+          'views': 123,
+          'comments': {}
         },
         'article_id_3': {
           'title': 'I love Flutter',
           'author': 'Mr Bean',
-          'views': 25
+          'views': 25,
+          'comments': {}
         }
       },
       'users': {
@@ -51,14 +63,11 @@ void main() {
       final docSnapshot = await docReference.get();
 
       expect(docSnapshot.documentID, 'uid_1');
-      expect(
-          docSnapshot.data, {'username': 'fakeUser', 'email': 'email@email.com'});
+      expect(docSnapshot.data,
+          {'username': 'fakeUser', 'email': 'email@email.com'});
     });
     test('add - check if added data is the same as provided', () async {
-      final userData = {
-        'username': 'newuser',
-        'email': 'newuser@email.com'
-      };
+      final userData = {'username': 'newuser', 'email': 'newuser@email.com'};
       final collection = mockFirestore.collection('users');
       final addedUserRef = await collection.add(userData);
       expect(addedUserRef.documentID, isNotNull);
@@ -70,10 +79,7 @@ void main() {
   });
 
   test('add - check if added data may be fetched then', () async {
-    final userData = {
-      'username': 'newuser',
-      'email': 'newuser@email.com'
-    };
+    final userData = {'username': 'newuser', 'email': 'newuser@email.com'};
     final collection = mockFirestore.collection('users');
     final addedUserRef = await collection.add(userData);
     final addedUser = collection.document(addedUserRef.documentID);
@@ -179,7 +185,8 @@ void main() {
     expect(limitedTests.documents[0].data['num'], 100);
   });
 
-  test('query.orderBy(..., descending = false) should return ordered data', () async {
+  test('query.orderBy(..., descending = false) should return ordered data',
+      () async {
     final orderedTests = await mockFirestore
         .collection('test_collection')
         .orderBy('num')
@@ -191,7 +198,8 @@ void main() {
     expect(orderedTests.documents[2].data['num'], 100);
   });
 
-  test('query.orderBy(..., descending = true) should return ordered data', () async {
+  test('query.orderBy(..., descending = true) should return ordered data',
+      () async {
     final orderedTests = await mockFirestore
         .collection('test_collection')
         .orderBy('num', descending: true)
@@ -203,4 +211,27 @@ void main() {
     expect(orderedTests.documents[2].data['num'], 70);
   });
 
+  test('Query a subcollection', () async {
+    final filteredData = await mockFirestore
+        .collection('articles')
+        .document('article_id_1')
+        .collection('comments')
+        .getDocuments();
+
+    expect(filteredData.documents, hasLength(2));
+    expect(filteredData.documents.elementAt(0).data['author'], 'Mike Kelly');
+    expect(filteredData.documents.elementAt(1).data['author'], 'Paul Arnold');
+  });
+
+  test('Query a subcollection where', () async {
+    final filteredData = await mockFirestore
+        .collection('articles')
+        .document('article_id_1')
+        .collection('comments')
+        .where('author', isEqualTo: 'Mike Kelly')
+        .getDocuments();
+
+    expect(filteredData.documents, hasLength(1));
+    expect(filteredData.documents.elementAt(0).data['author'], 'Mike Kelly');
+  });
 }
