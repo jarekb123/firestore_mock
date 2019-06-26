@@ -25,6 +25,11 @@ class MockDocumentReference extends Mock implements DocumentReference {
       Future.value(MockDocumentSnapshot.fromRef(this));
 
   @override
+  Stream<DocumentSnapshot> snapshots() {
+    return Stream.fromFuture(get());
+  }
+
+  @override
   Future<void> delete() async {
     //TODO: Propagate remove from MockFirestore data
     // Now: Do nothing

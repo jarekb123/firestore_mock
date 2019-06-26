@@ -1,3 +1,6 @@
+## [0.0.6] 2019/09/26
+* Basic implementation of `DocumentReference.snapshots()`
+
 ## [0.0.5] 2019/06/19
 * Updated cloud_firestore dependency to version 0.11.0+2
 * Added support for reading from subcollections
